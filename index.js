@@ -10,7 +10,7 @@ function addMovie(e){
   let movieTitle=document.createElement('span')
   movieTitle.textContent=inputField.value
   movie.appendChild(movieTitle)
-movieTitle.addEventListener('click', crossOffMovie)
+  movieTitle.addEventListener('click', crossOffMovie)
 
 
   let deleteBtn=document.createElement('button')
@@ -28,19 +28,25 @@ movieTitle.addEventListener('click', crossOffMovie)
 
 function deleteMovie(e){
   e.target.parentNode.remove()
-  message.textContent="message deleted"
-  
+  message.textContent=`${e.target.parentNode.firstChild.textContent} was deleted`
+  revealMessage(e)
 }
 
 function crossOffMovie(e){
   e.target.classList.toggle("checked")
 
   if(e.target.classList.contains("checked")){
-    message.textContent="movie watched!"
+    message.textContent=`${e.target.parentNode.firstChild.textContent} was watched!`
+    
   } else {
-    message.textContent="movie added back!"}
+    message.textContent=`${e.target.parentNode.firstChild.textContent} added back!`}
+ revealMessage(e)
+}
+
+function revealMessage(){
+  message.classList.remove("hide")
+  setTimeout(()=>{message.classList.toggle("hide")}, 1000)
 
 }
 
 document.querySelector('form').addEventListener('submit', addMovie)
-
